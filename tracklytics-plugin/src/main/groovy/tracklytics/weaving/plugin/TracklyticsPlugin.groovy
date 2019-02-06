@@ -27,12 +27,19 @@ class TracklyticsPlugin implements Plugin<Project> {
     }
 
     project.dependencies {
-      compile 'org.aspectj:aspectjrt:1.8.6'
-      compile 'com.orhanobut.tracklytics:tracklytics-runtime:1.3.0@aar'
+      implementation 'org.aspectj:aspectjrt:1.8.10'
+      implementation 'com.orhanobut.tracklytics:tracklytics-runtime:1.3.0@aar'
     }
 
     variants.all { variant ->
-      JavaCompile javaCompile = variant.javaCompile
+      JavaCompile javaCompile 
+      if (variant.hasProperty('javaCompileProvider')) {
+        // Android 3.3.0+
+        javaCompile = variant.javaCompileProvider.get()
+      } else {
+        javaCompile = variant.javaCompile
+      }
+
       javaCompile.doLast {
         String[] args = [
             "-showWeaveInfo",

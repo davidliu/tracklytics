@@ -8,7 +8,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'org.aspectj:aspectjtools:1.8.6'
+    classpath 'org.aspectj:aspectjtools:1.8.10'
   }
 }
 
@@ -30,17 +30,23 @@ android {
 }
 
 dependencies {
-  provided deps.aspectjRuntime
+  compileOnly deps.aspectjRuntime
 
-  testCompile deps.junit
-  testCompile deps.truth
-  testCompile deps.robolectric
-  testCompile deps.mockito
+  testImplementation deps.junit
+  testImplementation deps.truth
+  testImplementation deps.robolectric
+  testImplementation deps.mockito
 }
 
 android.libraryVariants.all { variant ->
   LibraryPlugin plugin = project.plugins.getPlugin(LibraryPlugin)
-  JavaCompile javaCompile = variant.javaCompile
+  JavaCompile javaCompile
+  if (variant.hasProperty('javaCompileProvider')) {
+    // Android 3.3.0+
+    javaCompile = variant.javaCompileProvider.get()
+  } else {
+    javaCompile = variant.javaCompile
+  }
   javaCompile.doLast {
     String[] args = [
         "-showWeaveInfo",
