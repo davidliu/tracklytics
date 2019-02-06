@@ -8,7 +8,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'org.aspectj:aspectjtools:1.8.10'
+    classpath 'org.aspectj:aspectjtools:1.9.1'
   }
 }
 

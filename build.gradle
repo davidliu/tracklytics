@@ -8,7 +8,7 @@ buildscript {
   dependencies {
     classpath 'com.android.tools.build:gradle:3.3.0'
     classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7'
-    classpath 'org.aspectj:aspectjtools:1.8.10'
+    classpath 'org.aspectj:aspectjtools:1.9.1'
     classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
 
     // NOTE: Do not place your application dependencies here; they belong
@@ -71,8 +71,8 @@ ext {
 ext.deps = [
 
         // AspectJ
-        aspectjRuntime: "org.aspectj:aspectjrt:1.8.10",
-        aspectjTools  : "org.aspectj:aspectjtools:1.8.10",
+        aspectjRuntime: "org.aspectj:aspectjrt:1.9.1",
+        aspectjTools  : "org.aspectj:aspectjtools:1.9.1",
 
         // Test dependencies
         junit         : 'junit:junit:4.12',
